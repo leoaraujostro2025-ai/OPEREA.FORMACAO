@@ -1,0 +1,523 @@
+import React, { useMemo, useState } from "react";
+import { Phone, MapPin, Instagram, Facebook, MessageCircle, BadgeCheck, BriefcaseBusiness, Excavator, ChevronRight } from "lucide-react";
+
+const cursos = [
+  { nome: "Escavadeira", descricao: "Formação prática para operação com foco em segurança, técnica e empregabilidade." },
+  { nome: "Retroescavadeira", descricao: "Treinamento para quem quer entrar rápido no mercado com uma máquina muito requisitada." },
+  { nome: "Pá Carregadeira", descricao: "Capacitação objetiva para atuação em obras, pátios, mineração e movimentação de materiais." },
+  { nome: "Trator de Esteiras", descricao: "Curso voltado para operação com precisão, controle e domínio em terrenos pesados." },
+];
+
+const diferenciais = [
+  {
+    titulo: "Aulas práticas em máquinas reais",
+    texto: "Nada de teoria solta. O aluno aprende com prática aplicada e contato com o equipamento de verdade.",
+    icon: Excavator,
+  },
+  {
+    titulo: "Certificado reconhecido",
+    texto: "Formação com apresentação profissional para fortalecer o currículo e aumentar a confiança do aluno.",
+    icon: BadgeCheck,
+  },
+  {
+    titulo: "Auxílio na empregabilidade",
+    texto: "A escola posiciona o aluno de forma mais forte para entrar no mercado de trabalho com direção.",
+    icon: BriefcaseBusiness,
+  },
+];
+
+const links = {
+  instagram: "https://www.instagram.com/escola.opera.formacao?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+  facebook: "https://www.facebook.com/profile.php?id=61570351162766&sk=mentions",
+  local: "https://share.google/ilYyXMdOOPxPO5l3r",
+  whatsapp: "https://wa.me/5547992723707",
+};
+
+const cidades = [
+  "Curitiba",
+  "Passo Fundo",
+  "Cascavel",
+  "Balneário",
+  "Itajaí",
+  "Sorocaba",
+  "Palhoça",
+];
+
+function gerarLinkWhatsapp(cidade) {
+  const mensagem = cidade
+    ? `Olá! Quero me inscrever no curso da Opera Formação para a cidade de ${cidade}.`
+    : "Olá! Quero saber mais sobre os cursos da Opera Formação.";
+
+  return `https://wa.me/5547992723707?text=${encodeURIComponent(mensagem)}`;
+}
+
+function ActionButton({ href, children, primary = false, icon: Icon }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`inline-flex items-center gap-2 rounded-2xl px-5 py-3 text-sm font-semibold transition-all duration-200 ${
+        primary
+          ? "bg-amber-500 text-zinc-950 hover:bg-amber-400"
+          : "border border-white/15 bg-white/5 text-white hover:bg-white/10"
+      }`}
+    >
+      {Icon ? <Icon size={18} /> : null}
+      {children}
+    </a>
+  );
+}
+
+function Card({ children, className = "" }) {
+  return (
+    <div className={`rounded-[28px] border border-white/10 bg-white/5 shadow-2xl shadow-black/20 backdrop-blur ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+export default function SiteOperaFormacao() {
+  const [cidadeSelecionada, setCidadeSelecionada] = useState("Itajaí");
+
+  const linkMatricula = useMemo(() => gerarLinkWhatsapp(cidadeSelecionada), [cidadeSelecionada]);
+  return (
+    <div className="min-h-screen bg-zinc-950 text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(245,158,11,0.18),transparent_28%),radial-gradient(circle_at_top_left,rgba(245,158,11,0.10),transparent_24%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-20 mb-6">
+          <div className="rounded-[24px] border border-white/10 bg-zinc-950/80 px-4 py-4 backdrop-blur md:px-6">
+            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+              <div>
+                <div className="text-xs uppercase tracking-[0.28em] text-amber-400">Escola de Máquinas Pesadas</div>
+                <div className="text-2xl font-black tracking-tight md:text-3xl">Opera Formação</div>
+              </div>
+
+              <nav className="flex flex-wrap gap-2 text-sm text-zinc-300">
+                <a href="#inicio" className="rounded-full px-3 py-2 hover:bg-white/5">Início</a>
+                <a href="#inscricao" className="rounded-full px-3 py-2 hover:bg-white/5">Inscrição</a>
+                <a href="#sobre" className="rounded-full px-3 py-2 hover:bg-white/5">Sobre nós</a>
+                <a href="#cursos" className="rounded-full px-3 py-2 hover:bg-white/5">Cursos</a>
+                <a href="#galeria" className="rounded-full px-3 py-2 hover:bg-white/5">Galeria</a>
+                <a href="#diferenciais" className="rounded-full px-3 py-2 hover:bg-white/5">Diferenciais</a>
+                <a href="#depoimentos" className="rounded-full px-3 py-2 hover:bg-white/5">Depoimentos</a>
+                <a href="#faq" className="rounded-full px-3 py-2 hover:bg-white/5">FAQ</a>
+                <a href="#contato" className="rounded-full px-3 py-2 hover:bg-white/5">Contato</a>
+              </nav>
+            </div>
+          </div>
+        </header>
+
+        <section id="inicio" className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <Card className="overflow-hidden p-6 md:p-8">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-amber-300">
+              Matrículas abertas
+            </div>
+
+            <h1 className="max-w-3xl text-4xl font-black leading-none tracking-tight sm:text-5xl md:text-6xl">
+              Formação prática para se tornar <span className="text-amber-400">operador de máquinas pesadas</span> com mais confiança e direção.
+            </h1>
+
+            <p className="mt-5 max-w-2xl text-base leading-7 text-zinc-300 md:text-lg">
+              Aprenda com profissionais, tenha contato com máquinas reais e se prepare para entrar no mercado com mais segurança, prática e credibilidade.
+            </p>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <ActionButton href={linkMatricula} primary icon={MessageCircle}>Quero fazer minha matrícula</ActionButton>
+              <ActionButton href={links.local} icon={MapPin}>Ver localização</ActionButton>
+            </div>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+              {diferenciais.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.titulo} className="rounded-2xl border border-white/10 bg-black/20 p-4">
+                    <div className="mb-3 inline-flex rounded-2xl bg-amber-500/15 p-3 text-amber-400">
+                      <Icon size={20} />
+                    </div>
+                    <h3 className="text-sm font-bold md:text-base">{item.titulo}</h3>
+                    <p className="mt-2 text-sm leading-6 text-zinc-400">{item.texto}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="flex h-full flex-col justify-between">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Presença digital</div>
+                <h2 className="mt-3 text-2xl font-black tracking-tight md:text-3xl">A escola certa para quem quer sair do interesse e ir para a ação.</h2>
+                <p className="mt-4 text-zinc-300 leading-7">
+                  A Opera Formação une apresentação profissional, prova visual e contato direto para transformar interesse em matrícula.
+                </p>
+              </div>
+
+              <div className="mt-8 space-y-3">
+                <a href={links.instagram} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-4 hover:bg-white/10">
+                  <div className="flex items-center gap-3">
+                    <Instagram className="text-amber-400" size={20} />
+                    <div>
+                      <div className="font-semibold">Instagram</div>
+                      <div className="text-sm text-zinc-400">@escola.opera.formacao</div>
+                    </div>
+                  </div>
+                  <ChevronRight size={18} className="text-zinc-500" />
+                </a>
+
+                <a href={links.facebook} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-4 hover:bg-white/10">
+                  <div className="flex items-center gap-3">
+                    <Facebook className="text-amber-400" size={20} />
+                    <div>
+                      <div className="font-semibold">Facebook</div>
+                      <div className="text-sm text-zinc-400">Página da escola</div>
+                    </div>
+                  </div>
+                  <ChevronRight size={18} className="text-zinc-500" />
+                </a>
+
+                <a href={links.local} target="_blank" rel="noreferrer" className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-4 hover:bg-white/10">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="text-amber-400" size={20} />
+                    <div>
+                      <div className="font-semibold">Localização</div>
+                      <div className="text-sm text-zinc-400">Abrir no mapa</div>
+                    </div>
+                  </div>
+                  <ChevronRight size={18} className="text-zinc-500" />
+                </a>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <section id="sobre" className="mt-8 grid gap-4 lg:grid-cols-[1fr_1fr]">
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Sobre nós</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Mais que curso: preparação real para quem quer trabalhar com máquinas pesadas.</h2>
+            <p className="mt-4 leading-7 text-zinc-300">
+              A Opera Formação prepara futuros operadores com foco em prática, segurança e realidade de mercado. Aqui, o aluno não fica só na teoria: ele se aproxima do que realmente vai encontrar no trabalho.
+            </p>
+            <p className="mt-4 leading-7 text-zinc-400">
+              Com estrutura forte, comunicação clara e foco em empregabilidade, a escola se posiciona como ponte entre formação e oportunidade profissional.
+            </p>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="text-4xl font-black text-amber-400">4</div>
+                <div className="mt-2 font-semibold">Formações principais</div>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">Escavadeira, retroescavadeira, pá carregadeira e trator de esteiras.</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                <div className="text-4xl font-black text-amber-400">100%</div>
+                <div className="mt-2 font-semibold">Foco em prática</div>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">Aprendizado pensado para gerar segurança operacional e percepção de mercado.</p>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <section id="cursos" className="mt-8">
+          <div className="mb-5">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Cursos</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Cursos pensados para gerar qualificação e abrir portas no mercado.</h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {cursos.map((curso) => (
+              <Card key={curso.nome} className="p-5">
+                <div className="mb-4 h-40 rounded-2xl bg-gradient-to-br from-amber-500/25 via-amber-300/5 to-white/5" />
+                <h3 className="text-xl font-black tracking-tight">{curso.nome}</h3>
+                <p className="mt-3 text-sm leading-6 text-zinc-400">{curso.descricao}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section id="inscricao" className="mt-8 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Inscrição por cidade</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Escolha a cidade e vá direto para o atendimento.</h2>
+            <p className="mt-4 max-w-2xl leading-7 text-zinc-300">
+              A Opera atende diferentes regiões. Selecione abaixo a cidade de interesse e abra o WhatsApp com a mensagem pronta para matrícula.
+            </p>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              {cidades.map((cidade) => {
+                const ativa = cidadeSelecionada === cidade;
+                return (
+                  <button
+                    key={cidade}
+                    type="button"
+                    onClick={() => setCidadeSelecionada(cidade)}
+                    className={`rounded-2xl border px-4 py-4 text-left transition ${
+                      ativa
+                        ? "border-amber-400 bg-amber-500/15 text-white"
+                        : "border-white/10 bg-white/5 text-zinc-300 hover:bg-white/10"
+                    }`}
+                  >
+                    <div className="text-base font-bold">{cidade}</div>
+                    <div className="mt-1 text-sm text-zinc-400">Selecionar atendimento para esta cidade</div>
+                  </button>
+                );
+              })}
+            </div>
+          </Card>
+
+          <Card className="overflow-hidden border-amber-400/20 bg-gradient-to-b from-amber-500/12 via-white/5 to-white/5 p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Cidade selecionada</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight">{cidadeSelecionada}</h2>
+            <p className="mt-4 leading-7 text-zinc-300">
+              O clique abaixo abre o WhatsApp com uma mensagem automática informando a cidade escolhida para acelerar o atendimento.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ActionButton href={linkMatricula} primary icon={MessageCircle}>Inscrever-se em {cidadeSelecionada}</ActionButton>
+              <ActionButton href={links.local} icon={MapPin}>Ver localização</ActionButton>
+            </div>
+            <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4 text-sm leading-6 text-zinc-400">
+              Cidades atendidas: Curitiba, Passo Fundo, Cascavel, Balneário, Itajaí, Sorocaba e Palhoça.
+            </div>
+          </Card>
+        </section>
+
+        <section className="mt-8">
+          <Card className="overflow-hidden border-amber-400/20 bg-gradient-to-r from-amber-500/12 via-white/5 to-amber-500/12 p-6 md:p-8">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Matrículas abertas</div>
+                <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Quer entrar no mercado com formação prática?</h2>
+                <p className="mt-3 max-w-2xl leading-7 text-zinc-300">
+                  Fale com a Opera agora e receba atendimento direto para matrícula, dúvidas sobre cursos e próximos passos.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <ActionButton href={linkMatricula} primary icon={MessageCircle}>Chamar no WhatsApp</ActionButton>
+                <ActionButton href={links.instagram} icon={Instagram}>Ver Instagram</ActionButton>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <section id="galeria" className="mt-8">
+          <div className="mb-5">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Galeria</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Máquinas, prática e ambiente de formação.</h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              {
+                titulo: "Turma formada em campo",
+                texto: "Imagem real da formação com máquinas pesadas e estrutura prática da escola.",
+                src: "sandbox:/mnt/data/IMG_4340.jpg",
+              },
+              {
+                titulo: "Ambiente e cultura da escola",
+                texto: "Registro institucional que fortalece confiança, organização e autoridade da marca.",
+                src: "sandbox:/mnt/data/dc2164f2-6322-49ec-b107-040bb3ea1897.JPG",
+              },
+              {
+                titulo: "Turma em formação",
+                texto: "Foto real com alunos e equipe, reforçando prova social e presença física da escola.",
+                src: "sandbox:/mnt/data/IMG_4468.jpg",
+              },
+              {
+                titulo: "Máquinas e prática real",
+                texto: "Foto que comunica operação, estrutura e experiência prática para novos alunos.",
+                src: "sandbox:/mnt/data/IMG_4544.jpg",
+              },
+            ].map((item) => (
+              <Card key={item.titulo} className="overflow-hidden p-3">
+                <img src={item.src} alt={item.titulo} className="h-52 w-full rounded-2xl object-cover" />
+                <div className="px-2 pb-2 pt-4">
+                  <div className="font-bold">{item.titulo}</div>
+                  <div className="mt-2 text-sm text-zinc-400">{item.texto}</div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section id="diferenciais" className="mt-8 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Por que escolher a Opera</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight">Autoridade, prática e direção.</h2>
+            <p className="mt-4 leading-7 text-zinc-300">
+              A decisão de matrícula acontece quando o aluno enxerga três coisas com clareza: confiança, prática real e perspectiva de trabalho. É isso que a Opera comunica.
+            </p>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="grid gap-4 md:grid-cols-3">
+              {diferenciais.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.titulo} className="rounded-2xl border border-white/10 bg-black/20 p-5">
+                    <div className="mb-4 inline-flex rounded-2xl bg-amber-500/15 p-3 text-amber-400">
+                      <Icon size={20} />
+                    </div>
+                    <h3 className="font-bold">{item.titulo}</h3>
+                    <p className="mt-3 text-sm leading-6 text-zinc-400">{item.texto}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
+        </section>
+
+        <section id="depoimentos" className="mt-8">
+          <div className="mb-5">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Depoimentos</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Quem conhece a Opera percebe que aqui a formação é levada a sério.</h2>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              {
+                nome: "Aluno em formação",
+                frase: "A prática com máquinas reais muda tudo. Você entende o equipamento de verdade e sai muito mais seguro.",
+              },
+              {
+                nome: "Turma presencial",
+                frase: "A estrutura, a organização e o jeito de ensinar passam confiança. Não parece improvisado. Parece profissional.",
+              },
+              {
+                nome: "Novo operador",
+                frase: "Pra quem quer entrar no mercado, a Opera encurta caminho. Você já sente que está mais preparado para trabalhar.",
+              },
+            ].map((item) => (
+              <Card key={item.nome} className="p-6">
+                <div className="text-5xl leading-none text-amber-400">“</div>
+                <p className="mt-3 text-base leading-7 text-zinc-300">{item.frase}</p>
+                <div className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-zinc-400">{item.nome}</div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-4 rounded-[24px] border border-dashed border-white/10 bg-white/5 px-5 py-4 text-sm leading-6 text-zinc-400">
+            Esses depoimentos já deixam a estrutura pronta. Depois, basta trocar por falas reais de alunos e manter a página ainda mais forte.
+          </div>
+        </section>
+
+        <section id="video" className="mt-8 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <Card className="overflow-hidden p-3 md:p-4">
+            <div className="mb-4 px-3 pt-3 md:px-4">
+              <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Veja a Opera em ação</div>
+              <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Estrutura real. Máquinas reais. Formação de verdade.</h2>
+            </div>
+            <video
+              controls
+              playsInline
+              className="w-full rounded-[24px] border border-white/10 bg-black"
+              preload="metadata"
+            >
+              <source src="sandbox:/mnt/data/copy_4F98DDFC-12F9-45E7-BDF3-0CD69454D73B.MOV" type="video/quicktime" />
+              Seu navegador não suporta vídeo.
+            </video>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Prova visual</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight">Quem vê, confia mais.</h2>
+            <p className="mt-4 leading-7 text-zinc-300">
+              Esse bloco transforma o site em uma vitrine mais viva. Em vez de só prometer prática, a Opera mostra movimento, estrutura, turma e operação real.
+            </p>
+            <p className="mt-4 leading-7 text-zinc-400">
+              Para quem está pensando em se matricular, vídeo reduz dúvida, aumenta percepção de autoridade e acelera o clique no WhatsApp.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ActionButton href={linkMatricula} primary icon={MessageCircle}>Quero minha matrícula</ActionButton>
+              <ActionButton href={links.instagram} icon={Instagram}>Ver mais no Instagram</ActionButton>
+            </div>
+          </Card>
+        </section>
+
+        <section id="faq" className="mt-8 grid gap-4 lg:grid-cols-[1fr_0.9fr]">
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">FAQ</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">As respostas que ajudam o aluno a decidir mais rápido.</h2>
+
+            <div className="mt-6 space-y-3">
+              {[
+                {
+                  pergunta: "Preciso ter experiência para fazer o curso?",
+                  resposta: "Não. A formação atende tanto quem está começando quanto quem quer ganhar mais segurança e qualificação.",
+                },
+                {
+                  pergunta: "As aulas têm prática real?",
+                  resposta: "Sim. A proposta da Opera é aproximar o aluno da realidade da operação com contato prático e aplicação direta.",
+                },
+                {
+                  pergunta: "Recebo certificado?",
+                  resposta: "Sim. O site comunica certificado reconhecido como parte da formação oferecida pela escola.",
+                },
+                {
+                  pergunta: "Como faço minha matrícula?",
+                  resposta: "O caminho mais rápido é chamar no WhatsApp e falar direto com a escola para confirmar vaga, turma e próximos passos.",
+                },
+              ].map((item) => (
+                <div key={item.pergunta} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+                  <div className="font-bold text-white">{item.pergunta}</div>
+                  <p className="mt-2 text-sm leading-6 text-zinc-400">{item.resposta}</p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="overflow-hidden border-amber-400/20 bg-gradient-to-b from-amber-500/12 via-white/5 to-white/5 p-6 md:p-8">
+            <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">CTA direto</div>
+            <h2 className="mt-2 text-3xl font-black tracking-tight">Tirou a dúvida? Agora é agir.</h2>
+            <p className="mt-4 leading-7 text-zinc-300">
+              A página já conduziu o visitante por prova visual, proposta de valor, diferenciais, vídeo e perguntas principais. Agora o clique precisa estar fácil.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <ActionButton href={linkMatricula} primary icon={MessageCircle}>Quero me matricular</ActionButton>
+              <ActionButton href={links.local} icon={MapPin}>Ver localização</ActionButton>
+            </div>
+          </Card>
+        </section>
+
+        <section id="contato" className="mt-8">
+          <Card className="p-6 md:p-8">
+            <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">Contato</div>
+                <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">Fale com a Opera e dê o próximo passo para sua formação.</h2>
+                <p className="mt-4 max-w-2xl text-zinc-300 leading-7">
+                  Chame no WhatsApp para tirar dúvidas, confirmar vaga e iniciar sua matrícula de forma rápida.
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <ActionButton href={linkMatricula} primary icon={Phone}>Fazer matrícula agora</ActionButton>
+                  <ActionButton href={links.instagram} icon={Instagram}>Instagram</ActionButton>
+                  <ActionButton href={links.facebook} icon={Facebook}>Facebook</ActionButton>
+                  <ActionButton href={links.local} icon={MapPin}>Localização</ActionButton>
+                </div>
+              </div>
+
+              <div className="rounded-[24px] border border-amber-400/20 bg-amber-500/10 px-6 py-5 text-sm text-amber-100">
+                <div className="font-bold text-white">Observação</div>
+                <p className="mt-2 leading-6 text-amber-100/90">
+                  WhatsApp oficial da escola configurado para atendimento direto e matrícula rápida.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        <a
+          href={linkMatricula}
+          target="_blank"
+          rel="noreferrer"
+          className="fixed bottom-5 right-5 z-30 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-500 px-5 py-3 text-sm font-bold text-zinc-950 shadow-2xl shadow-black/30 transition hover:bg-amber-400"
+        >
+          <MessageCircle size={18} />
+          Matrículas no WhatsApp
+        </a>
+      </div>
+    </div>
+  );
+}
